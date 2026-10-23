@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<!--
+=====================================================================
+THANKSGIVING RE-THEME (copy/paste on Nov 1, 2026)
+---------------------------------------------------------------------
+Headline (h1):     Which Turkey Day Monster <span class="glow">Are You?</span>
+Badge:             Thanksgiving 2026 · Ends Nov 27
+Subhead:           Answer 5 quick questions, find your Thanksgiving monster,
+                   and enter for a shot at a $500 Thanksgiving gift card.
+Hero emojis:       🦃🥧🍁🌽🍂
+CTA:               Take the quiz (unchanged)
+Results:           Swap the RESULTS object in the script (titles, tags,
+                   emojis, colors, descriptions). Example swap:
+                     buddy     -> "Gravy Unicorn"        🦄
+                     nikki     -> "The Pie Stalker"      🥧
+                     agamemnon -> "The Returning Chef"   🍗
+                     verity    -> "Blocky Turkey"        🦃
+                     carl      -> "Sarcastic Sidekick"   🍁
+Keep the question keys the same so scoring still works.
+Thanksgiving spin prizes: change SEGMENTS labels only.
+=====================================================================
+
+GOOGLE ANALYTICS (GA4) READY HOOK (uncomment and add your ID):
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+The script below calls gtag() only if it exists, so it is safe without GA.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Which Horror Character Are You? | Halloween 2026 Quiz</title>
+<meta name="description" content="Take the 60-second Halloween 2026 horror quiz, find your monster, and enter for a shot at a $500 Halloween gift card.">
+<meta name="theme-color" content="#0a0612">
+<meta property="og:title" content="Which Horror Character Are You?">
+<meta property="og:description" content="Find your Halloween 2026 monster and enter for a $500 gift card.">
+<meta property="og:type" content="website">
+<!-- OG image placeholder: <meta property="og:image" content="https://YOUR-CDN/og-halloween.png"> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0612;--panel:#140b22;--purple:#7b2ff7;--purple2:#b06bff;--orange:#ff7a18;
+  --ink:#f6f1ff;--mute:#b9a9d6;--radius:18px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  background:radial-gradient(1100px 600px at 50% -10%,#2d1054 0%,var(--bg) 62%) fixed;
+  color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px 14px 36px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{width:100%;max-width:560px}
+h1,h2{font-family:Creepster,Impact,"Arial Black",sans-serif;font-weight:400;letter-spacing:1px;line-height:1.05;margin:0}
+h1{font-size:clamp(2.9rem,13vw,5.4rem);text-shadow:0 0 20px rgba(255,122,24,.5),0 3px 0 #3b0a6e;text-align:center}
+.glow{color:var(--orange)}
+.card{
+  background:linear-gradient(180deg,rgba(44,20,76,.88),rgba(20,11,34,.94));
+  border:1px solid rgba(176,107,255,.25);border-radius:var(--radius);padding:24px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.screen{display:none}
+.screen.active{display:block;animation:rise .45s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;
+  padding:16px 28px;font:800 1.1rem Inter,system-ui,sans-serif;color:#fff;cursor:pointer;min-height:54px;width:100%;
+  background:linear-gradient(90deg,var(--orange),#ff4d6d 55%,var(--purple));
+  box-shadow:0 10px 30px rgba(255,122,24,.35);text-decoration:none;
+  transition:transform .15s ease,box-shadow .2s ease,opacity .2s;
+}
+.btn:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 14px 40px rgba(255,122,24,.5)}
+.btn:active{transform:scale(.98)}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.ghost{background:transparent;border:2px solid var(--purple2);box-shadow:none}
+.pulse{animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,122,24,.5)}70%,100%{box-shadow:0 0 0 14px rgba(255,122,24,0)}}
+button:focus-visible,a:focus-visible,input:focus-visible,.opt:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.sub{font-size:1.08rem;color:var(--mute);margin:16px 0 26px;line-height:1.55}
+.badge{display:inline-block;background:rgba(255,122,24,.14);color:var(--orange);border:1px solid rgba(255,122,24,.4);padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:800;letter-spacing:.4px;margin-bottom:16px}
+.mascots{font-size:clamp(2rem,8vw,2.8rem);letter-spacing:8px;margin:14px 0 10px;animation:float 3.2s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-7px)}}
+.fine{font-size:.74rem;color:#8e7fb0;line-height:1.5;margin-top:16px}
+.progress{height:8px;background:#2a1a40;border-radius:99px;overflow:hidden;margin-bottom:18px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--orange));transition:width .4s ease}
+.qcount{font-size:.82rem;color:var(--mute);font-weight:800;letter-spacing:.8px;text-transform:uppercase}
+.qtext{font-family:Creepster,Impact,sans-serif;font-size:clamp(1.9rem,7vw,2.5rem);margin:8px 0 18px;line-height:1.1}
+.qtext:focus{outline:none}
+.opts{display:grid;gap:10px}
+.opt{
+  width:100%;text-align:left;background:rgba(255,255,255,.04);color:var(--ink);
+  border:1px solid rgba(176,107,255,.3);border-radius:14px;padding:14px 16px;
+  font:600 1rem Inter,system-ui,sans-serif;cursor:pointer;min-height:54px;
+  transition:transform .15s,background .2s,border-color .2s;
+}
+.opt:hover{background:rgba(123,47,247,.25);border-color:var(--purple2);transform:translateX(4px)}
+.opt .k{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--orange);color:#1a0b00;font-weight:800;font-size:.8rem;margin-right:10px;vertical-align:middle}
+.anim-in{animation:rise .35s ease both}
+.teaser{text-align:center}
+.result-emoji{font-size:4.6rem;text-align:center;animation:pop .6s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes pop{from{transform:scale(.2);opacity:0}to{transform:none;opacity:1}}
+.result-title{font-family:Creepster,Impact,sans-serif;font-size:clamp(2.3rem,9vw,3.3rem);text-align:center;margin:6px 0;line-height:1}
+.tag{text-align:center;font-weight:800;text-transform:uppercase;letter-spacing:1.6px;font-size:.84rem}
+.locked{filter:blur(5px);user-select:none;color:var(--mute);margin:14px 0 4px;line-height:1.5;text-align:center}
+.gate-title{font-size:clamp(1.9rem,7vw,2.4rem);text-align:center;margin-top:18px}
+form{display:grid;gap:14px;margin-top:18px}
+label{display:block;font-weight:700;font-size:.92rem;margin-bottom:6px}
+label small{color:var(--mute);font-weight:400}
+input[type=text],input[type=email],input[type=tel]{
+  width:100%;padding:14px;border-radius:12px;border:1px solid rgba(176,107,255,.35);
+  background:#0d0716;color:var(--ink);font:1rem Inter,system-ui,sans-serif;min-height:52px;
+}
+input::placeholder{color:#6f5f8f}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.8rem;color:var(--mute);line-height:1.5;font-weight:400}
+.check input{margin-top:3px;width:20px;height:20px;accent-color:var(--orange);flex:0 0 auto}
+.err{color:#ff9a9a;font-size:.82rem;min-height:1.1em;margin-top:4px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.share-box{background:#0d0716;border-radius:12px;padding:14px;font-size:.95rem;line-height:1.5;margin:16px 0;border:1px dashed rgba(255,122,24,.5)}
+.status{min-height:1.4em;font-size:.9rem;color:var(--mute);margin:10px 0 0;text-align:center}
+.spin-card{margin-top:22px;text-align:center}
+.wheel-stage{position:relative;width:min(300px,78vw);aspect-ratio:1;margin:14px auto 8px}
+.wheel-stage canvas{width:100%;height:100%;display:block;filter:drop-shadow(0 10px 25px rgba(123,47,247,.45))}
+.pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:28px solid var(--orange);filter:drop-shadow(0 2px 4px #000);z-index:2}
+.spin-msg{min-height:2.6em;margin:12px 0 0;font-weight:700;line-height:1.4}
+.hidden{display:none!important}
+@media (min-width:600px){.card{padding:32px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <section id="s-hero" class="screen active" aria-labelledby="h1">
+    <div class="card" style="text-align:center">
+      <span class="badge">Halloween 2026 · Ends Oct 31</span>
+      <div class="mascots" aria-hidden="true">🦄👁️🏛️🟩🐱</div>
+      <h1 id="h1">Which Horror Character <span class="glow">Are You?</span></h1>
+      <p class="sub">Answer 5 quick questions, find your Halloween 2026 monster, and enter for a shot at a <strong>$500 Halloween gift card</strong>.</p>
+      <button class="btn pulse" id="startBtn" type="button">Take the quiz</button>
+      <p class="fine">Takes about 60 seconds. No purchase necessary. US residents 18+. Sponsor: [SPONSOR NAME]. Full official rules: [RULES URL]. Odds depend on the number of entries.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="s-quiz" class="screen" aria-label="Halloween personality quiz">
+    <div class="card">
+      <div class="progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><i id="bar"></i></div>
+      <div class="qcount" id="qcount" aria-live="polite">Question 1 of 5</div>
+      <h2 class="qtext" id="qtitle" tabindex="-1"></h2>
+      <div class="opts" id="opts" role="group" aria-labelledby="qtitle"></div>
+    </div>
+  </section>
+
+  <!-- ============ EMAIL GATE ============ -->
+  <section id="s-gate" class="screen" aria-labelledby="gateTitle">
+    <div class="card">
+      <div class="teaser">
+        <div class="result-emoji" id="gEmoji" aria-hidden="true"></div>
+        <div class="tag" id="gTag"></div>
+        <h2 class="result-title" id="gTitle"></h2>
+        <p class="locked" aria-hidden="true">Your full monster profile is ready. Enter your details to unlock it.</p>
+      </div>
+      <h2 class="gate-title" id="gateTitle">Unlock your result + enter to win</h2>
+      <p class="sub" style="margin:8px 0 0;text-align:center">Your full card plus an entry into the $500 Halloween gift card drawing.</p>
+
+      <form id="leadForm" novalidate>
+        <div>
+          <label for="fname">First name</label>
+          <input id="fname" name="first_name" type="text" autocomplete="given-name" maxlength="60" required aria-describedby="fname-err">
+          <div class="err" id="fname-err" role="alert"></div>
+        </div>
+        <div>
+          <label for="femail">Email address</label>
+          <input id="femail" name="email" type="email" autocomplete="email" inputmode="email" maxlength="120" required aria-describedby="femail-err" placeholder="you@example.com">
+          <div class="err" id="femail-err" role="alert"></div>
+        </div>
+        <div>
+          <label for="fphone">Mobile phone <small>(optional, US numbers only)</small></label>
+          <input id="fphone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="(555) 555-5555" aria-describedby="fphone-err">
+          <div class="err" id="fphone-err" role="alert"></div>
+        </div>
+        <div>
+          <label class="check" for="fconsent">
+            <input id="fconsent" name="consent" type="checkbox" required aria-describedby="fconsent-err">
+            <span>[CONSENT PLACEHOLDER: replace with your compliant language. Example: "I agree to receive emails from [SPONSOR NAME] about Halloween offers and the sweepstakes. Consent is not a condition of purchase. Reply STOP to opt out of texts."]</span>
+          </label>
+          <div class="err" id="fconsent-err" role="alert"></div>
+        </div>
+        <!-- honeypot: bots fill this, humans never see it -->
+        <div class="hp" aria-hidden="true"><label for="fweb">Leave this empty</label><input id="fweb" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <button class="btn pulse" type="submit" id="leadBtn">Reveal my result + enter</button>
+        <p class="fine">By submitting you agree to the sweepstakes rules at [RULES URL]. No purchase necessary. Void where prohibited. Sponsor: [SPONSOR NAME], [SPONSOR ADDRESS]. Privacy policy: [PRIVACY URL].</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ RESULT + SHARE + SPIN ============ -->
+  <section id="s-result" class="screen" aria-labelledby="rTitle">
+    <div class="card" style="text-align:center">
+      <div class="result-emoji" id="rEmoji" aria-hidden="true"></div>
+      <div class="tag" id="rTag"></div>
+      <h2 class="result-title" id="rTitle"></h2>
+      <p class="sub" id="rDesc" style="margin:14px 0 6px"></p>
+      <div class="share-box" id="shareText" aria-label="Shareable result text"></div>
+      <button class="btn" id="shareBtn" type="button">Share your result</button>
+      <p class="status" id="shareMsg" role="status" aria-live="polite"></p>
+      <p class="status" id="entryMsg" style="margin-top:14px">You're entered for the $500 Halloween gift card drawing. Winners are contacted by email.</p>
+      <a class="btn ghost hidden" id="offerLink" href="#" rel="noopener sponsored" target="_blank" style="margin-top:10px">See your bonus offer</a>
+    </div>
+
+    <div class="card spin-card" id="spinCard">
+      <span class="badge">Bonus spin</span>
+      <h2 style="font-size:2.3rem">Spin for a bonus prize</h2>
+      <p class="sub" style="margin:8px 0 0">One free spin every 24 hours. The rare gift card wedge is about a 1 in 20 shot per spin.</p>
+      <div class="wheel-stage">
+        <div class="pointer" aria-hidden="true"></div>
+        <canvas id="wheel" width="600" height="600" role="img" aria-label="Prize wheel: six small prizes and one rare $500 gift card entry wedge"></canvas>
+      </div>
+      <button class="btn" id="spinBtn" type="button">Spin the wheel</button>
+      <p class="spin-msg" id="spinMsg" role="status" aria-live="polite"></p>
+    </div>
+
+    <p class="fine" style="text-align:center">Sponsor: [SPONSOR NAME]. Official rules: [RULES URL]. Bonus spin prizes are not guaranteed to be awarded. No purchase necessary.</p>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ================= CONFIG: SWAP THESE ================= */
+  var CONFIG = {
+    brand: "Which Horror Character Are You? (Halloween 2026)",
+    quizId: "halloween-2026-horror-quiz",
+    offerUrl: "https://YOUR-OFFER-URL.example/offer",       // <- swap: offer / landing page after the gate (leave as-is to hide the button)
+    postbackUrl: "https://YOUR-AFFILIATE-POSTBACK.example/lead", // <- swap: affiliate postback / lead endpoint
+    spinCooldownMs: 24 * 60 * 60 * 1000,                    // once per 24h
+    spinRareWeight: 0.3,                                    // rare wedge weight vs each common wedge (1). ~4.8% chance
+    storageKey: "hq_last_spin_v1",
+    shareUrl: window.location.href.split("#")[0]
+  };
+
+  /* ================= RESULTS (edit titles, colors, copy) ================= */
+  var RESULTS = {
+    buddy: {
+      title: "Buddy the Unicorn", tag: "The Glitter Nightmare", emoji: "🦄", color: "#ff6fd8",
+      desc: "Sparkly on the outside, cursed on the inside. You bring the rainbows, then quietly turn the party into a horror movie. Halloween is your playground."
+    },
+    nikki: {
+      title: "Nikki", tag: "The Obsessed One", emoji: "👁️", color: "#e0115f",
+      desc: "You never blink, you never forget, and you always know who is watching. Obsession is not a flaw for you. It is a costume and a personality."
+    },
+    agamemnon: {
+      title: "Agamemnon", tag: "The King Who Came Home", emoji: "🏛️", color: "#e6b422",
+      desc: "Ten years away and you still want your throne back. Epic, dramatic, and absolutely unstoppable. Halloween is just another quest for glory."
+    },
+    verity: {
+      title: "Verity", tag: "The Blocky Haunt", emoji: "🟩", color: "#3ddc84",
+      desc: "Mine by day, build by night, and somehow the scariest thing in the world is still a 1x1 block. You survive by staying one step ahead of the dark."
+    },
+    carl: {
+      title: "Dungeon Crawler Carl", tag: "The Sarcastic Survivor", emoji: "🐱", color: "#ff7a18",
+      desc: "You roast the monsters while you fight them and somehow you always make it out. Dry humor, bad decisions, and a cat who believes in you."
+    }
+  };
+  var RESULT_ORDER = ["buddy", "nikki", "agamemnon", "verity", "carl"];
+
+  /* ================= QUESTIONS (5 questions, one option per result) ================= */
+  var QUESTIONS = [
+    { q: "Pick your perfect Friday night", o: [
+      { t: "Glitter party with a cursed twist", k: "buddy" },
+      { t: "Watching the room from the back corner", k: "nikki" },
+      { t: "Sailing home to reclaim what is yours", k: "agamemnon" },
+      { t: "Mining, building, and surviving until dawn", k: "verity" },
+      { t: "Crawling a dungeon and roasting the monsters", k: "carl" }
+    ]},
+    { q: "Which movie night pick wins?", o: [
+      { t: "Cute but cursed horror", k: "buddy" },
+      { t: "Obsessive psychological thriller", k: "nikki" },
+      { t: "Epic myth with a bloody revenge arc", k: "agamemnon" },
+      { t: "Blocky pixel horror with a slow build", k: "verity" },
+      { t: "Snarky fantasy comedy with a sword", k: "carl" }
+    ]},
+    { q: "Your costume energy?", o: [
+      { t: "Glitter and gore, all in", k: "buddy" },
+      { t: "Mysterious and impossible to ignore", k: "nikki" },
+      { t: "Ancient warrior, dramatic entrance", k: "agamemnon" },
+      { t: "Pixel-perfect, one block at a time", k: "verity" },
+      { t: "Unhinged adventurer with a snack bag", k: "carl" }
+    ]},
+    { q: "Your role in the group chat?", o: [
+      { t: "The hype one with 47 emojis", k: "buddy" },
+      { t: "The one who knows everyone's secrets", k: "nikki" },
+      { t: "The one who always comes back", k: "agamemnon" },
+      { t: "The builder who never stops building", k: "verity" },
+      { t: "The one who says 'bad idea' and goes anyway", k: "carl" }
+    ]},
+    { q: "Pick a Halloween snack", o: [
+      { t: "Candy corn with glitter sprinkles", k: "buddy" },
+      { t: "Black coffee at midnight", k: "nikki" },
+      { t: "Olives, bread, and a big red wine", k: "agamemnon" },
+      { t: "Blocky cake you mined yourself", k: "verity" },
+      { t: "Cheap pizza with a side of cat treats", k: "carl" }
+    ]}
+  ];
+
+  /* ================= SPIN WHEEL SEGMENTS (7 wedges: 6 small + 1 rare) ================= */
+  var SEGMENTS = [
+    { label: "Sticker pack",     color: "#7b2ff7", rare: false },
+    { label: "Fright badge",     color: "#ff7a18", rare: false },
+    { label: "Phone wallpaper",  color: "#3b1a6e", rare: false },
+    { label: "Mystery treat",    color: "#ff4d6d", rare: false },
+    { label: "Spooky playlist",  color: "#2a1450", rare: false },
+    { label: "Extra quiz retake", color: "#c44dff", rare: false },
+    { label: "RARE: $500 GIFT CARD ENTRY", color: "#ffd166", rare: true }
+  ];
+
+  /* ================= HELPERS ================= */
+  var $ = function (id) { return document.getElementById(id); };
+  function safeGet(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }
+  function safeSet(k, v) { try { window.localStorage.setItem(k, v); return true; } catch (e) { return false; } }
+
+  // Analytics hook: works with GA4 gtag, dataLayer, or nothing.
+  function track(name, params) {
+    try {
+      if (typeof window.gtag === "function") window.gtag("event", name, params || {});
+      if (window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({ event: name }, params || {}));
+    } catch (e) { /* analytics must never break the funnel */ }
+  }
+
+  // Lead hook. Override by defining window.__leadSubmit BEFORE this script, or reassign it later.
+  // Default behavior: dispatches a "lead:submit" CustomEvent you can listen for.
+  if (typeof window.__leadSubmit !== "function") {
+    window.__leadSubmit = function (payload) {
+      try { window.dispatchEvent(new CustomEvent("lead:submit", { detail: payload })); } catch (e) {}
+      // -----------------------------------------------------------------
+      // AFFILIATE POSTBACK PLACEHOLDER (uncomment and set CONFIG.postbackUrl):
+      // fetch(CONFIG.postbackUrl, {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(payload),
+      //   keepalive: true
+      // }).catch(function () {});
+      //
+      // Or GET-style pixel postback:
+      // new Image().src = CONFIG.postbackUrl + "?click_id=" + encodeURIComponent(payload.click_id || "") + "&result=" + encodeURIComponent(payload.result || "");
+      // -----------------------------------------------------------------
+    };
+  }
+
+  function showScreen(id) {
+    var screens = document.querySelectorAll(".screen");
+    for (var i = 0; i < screens.length; i++) screens[i].classList.remove("active");
+    var el = $(id);
+    el.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    var focusTarget = el.querySelector("h1, h2");
+    if (focusTarget) { focusTarget.setAttribute("tabindex", "-1"); focusTarget.focus({ preventScroll: true }); }
+  }
+
+  function utmParams() {
+    var out = {};
+    try {
+      var sp = new URLSearchParams(window.location.search);
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "click_id", "subid"].forEach(function (k) {
+        if (sp.get(k)) out[k] = sp.get(k).slice(0, 120);
+      });
+    } catch (e) {}
+    return out;
+  }
+
+  /* ================= QUIZ ================= */
+  var qi = 0, picks = [], result = null;
+
+  function renderQuestion() {
+    var q = QUESTIONS[qi];
+    $("qcount").textContent = "Question " + (qi + 1) + " of " + QUESTIONS.length;
+    $("bar").style.width = ((qi) / QUESTIONS.length * 100) + "%";
+    document.querySelector(".progress").setAttribute("aria-valuenow", String(qi));
+    $("qtitle").textContent = q.q;
+    var wrap = $("opts");
+    wrap.innerHTML = "";
+    var letters = ["A", "B", "C", "D", "E"];
+    q.o.forEach(function (opt, idx) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "opt anim-in";
+      b.style.animationDelay = (idx * 0.05) + "s";
+      var k = document.createElement("span");
+      k.className = "k";
+      k.setAttribute("aria-hidden", "true");
+      k.textContent = letters[idx];
+      b.appendChild(k);
+      b.appendChild(document.createTextNode(opt.t));
+      b.setAttribute("aria-label", letters[idx] + ". " + opt.t);
+      b.addEventListener("click", function () { pick(opt.k); });
+      wrap.appendChild(b);
+    });
+    $("qtitle").focus({ preventScroll: true });
+  }
+
+  function pick(key) {
+    picks.push(key);
+    qi++;
+    if (qi < QUESTIONS.length) { renderQuestion(); return; }
+    finishQuiz();
+  }
+
+  function scoreResult() {
+    var tally = {};
+    RESULT_ORDER.forEach(function (k) { tally[k] = 0; });
+    picks.forEach(function (k) { tally[k]++; });
+    var best = null, bestScore = -1;
+    // ties resolve in RESULT_ORDER, so results are deterministic
+    RESULT_ORDER.forEach(function (k) { if (tally[k] > bestScore) { bestScore = tally[k]; best = k; } });
+    return best;
+  }
+
+  function finishQuiz() {
+    $("bar").style.width = "100%";
+    var key = scoreResult();
+    result = { key: key, title: RESULTS[key].title, tag: RESULTS[key].tag, emoji: RESULTS[key].emoji, color: RESULTS[key].color, desc: RESULTS[key].desc };
+    $("gEmoji").textContent = result.emoji;
+    $("gTag").textContent = result.tag;
+    $("gTag").style.color = result.color;
+    $("gTitle").textContent = result.title;
+    $("gTitle").style.color = result.color;
+    track("quiz_complete", { result: key });
+    showScreen("s-gate");
+  }
+
+  /* ================= EMAIL GATE ================= */
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function setErr(id, msg) { $(id).textContent = msg || ""; }
+
+  function normalizePhone(raw) {
+    var digits = (raw || "").replace(/\D/g, "");
+    if (digits.length === 11 && digits.charAt(0) === "1") digits = digits.slice(1);
+    return digits;
+  }
+
+  function validateGate() {
+    var ok = true, firstBad = null;
+    var name = $("fname").value.trim();
+    var email = $("femail").value.trim();
+    var phoneRaw = $("fphone").value.trim();
+    var phone = normalizePhone(phoneRaw);
+    var consent = $("fconsent").checked;
+
+    setErr("fname-err", ""); setErr("femail-err", ""); setErr("fphone-err", ""); setErr("fconsent-err", "");
+
+    if (!name) { setErr("fname-err", "Please enter your first name."); ok = false; firstBad = firstBad || "fname"; }
+    if (!EMAIL_RE.test(email)) { setErr("femail-err", "Enter a valid email address, like you@example.com."); ok = false; firstBad = firstBad || "femail"; }
+    if (phoneRaw && phone.length !== 10) { setErr("fphone-err", "Enter a 10-digit US mobile number, or leave it blank."); ok = false; firstBad = firstBad || "fphone"; }
+    if (!consent) { setErr("fconsent-err", "Please tick the box to enter the drawing."); ok = false; firstBad = firstBad || "fconsent"; }
+    if ($("fweb").value) ok = false; // honeypot: silently fail for bots
+
+    if (!ok && firstBad) $(firstBad).focus();
+    return ok ? { name: name, email: email, phone: phone ? "+1" + phone : "" } : null;
+  }
+
+  $("leadForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var data = validateGate();
+    if (!data) return;
+    var btn = $("leadBtn");
+    btn.disabled = true;
+    btn.textContent = "Unlocking...";
+
+    var payload = Object.assign({
+      quiz: CONFIG.quizId,
+      result: result.key,
+      result_title: result.title,
+      first_name: data.name,
+      email: data.email,
+      phone: data.phone,
+      consent: true,
+      ts: new Date().toISOString(),
+      page: window.location.href.split("#")[0],
+      ua: navigator.userAgent.slice(0, 200)
+    }, utmParams());
+
+    try { window.__leadSubmit(payload); } catch (err) { /* never block the result */ }
+    track("generate_lead", { result: result.key, quiz: CONFIG.quizId });
+
+    showResult();
+    btn.disabled = false;
+    btn.textContent = "Reveal my result + enter";
+  });
+
+  /* ================= RESULT + SHARE ================= */
+  function showResult() {
+    $("rEmoji").textContent = result.emoji;
+    $("rTag").textContent = result.tag;
+    $("rTag").style.color = result.color;
+    $("rTitle").textContent = result.title;
+    $("rTitle").style.color = result.color;
+    $("rDesc").textContent = result.desc;
+    $("shareText").textContent = shareMessage();
+    if (CONFIG.offerUrl && CONFIG.offerUrl.indexOf("YOUR-OFFER-URL") === -1) {
+      var ol = $("offerLink");
+      ol.href = CONFIG.offerUrl;
+      ol.classList.remove("hidden");
+    }
+    drawWheel(wheelRot);
+    updateSpinUI();
+    showScreen("s-result");
+    track("result_view", { result: result.key });
+  }
+
+  function shareMessage() {
+    return "I'm " + result.title + " (" + result.tag + ") in the Halloween 2026 horror quiz. " +
+      "Find your monster: " + CONFIG.shareUrl;
+  }
+
+  function buildCardBlob() {
+    return new Promise(function (resolve, reject) {
+      var c = document.createElement("canvas");
+      c.width = 1080; c.height = 1080;
+      var x = c.getContext("2d");
+      var g = x.createRadialGradient(540, 300, 80, 540, 540, 800);
+      g.addColorStop(0, "#3a1670"); g.addColorStop(1, "#0a0612");
+      x.fillStyle = g; x.fillRect(0, 0, 1080, 1080);
+      x.textAlign = "center";
+      x.fillStyle = "#ff7a18"; x.font = "bold 46px sans-serif";
+      x.fillText("WHICH HORROR CHARACTER ARE YOU?", 540, 120);
+      x.font = "260px sans-serif"; x.fillText(result.emoji, 540, 470);
+      x.fillStyle = result.color; x.font = "bold 92px sans-serif";
+      x.fillText(result.title, 540, 620);
+      x.fillStyle = "#f6f1ff"; x.font = "bold 46px sans-serif";
+      x.fillText(result.tag, 540, 700);
+      x.fillStyle = "#b9a9d6"; x.font = "36px sans-serif";
+      x.fillText("Find yours at the Halloween 2026 quiz", 540, 960);
+      c.toBlob(function (b) { b ? resolve(b) : reject(new Error("no blob")); }, "image/png");
+    });
+  }
+
+  function shareMsg(t) { $("shareMsg").textContent = t; }
+
+  $("shareBtn").addEventListener("click", async function () {
+    var text = shareMessage();
+    track("share_click", { result: result.key });
+    // 1. Web Share with an image, where supported
+    try {
+      if (navigator.canShare && navigator.share) {
+        var blob = await buildCardBlob();
+        var file = new File([blob], "my-horror-result.png", { type: "image/png" });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: "My Halloween monster", text: text });
+          shareMsg("Thanks for sharing!");
+          return;
+        }
+      }
+      // 2. Web Share with text + link
+      if (navigator.share) {
+        await navigator.share({ title: "My Halloween monster", text: text, url: CONFIG.shareUrl });
+        shareMsg("Thanks for sharing!");
+        return;
+      }
+    } catch (err) {
+      if (err && err.name === "AbortError") return; // user closed the sheet
+    }
+    // 3. Clipboard fallback
+    try {
+      await navigator.clipboard.writeText(text);
+      shareMsg("Copied! Paste it anywhere to share your monster.");
+    } catch (err) {
+      shareMsg("Couldn't copy automatically. Select the text above and copy it.");
+    }
+  });
+
+  /* ================= SPIN WHEEL ================= */
+  var canvas = $("wheel"), ctx = canvas.getContext("2d");
+  var wheelRot = 0, spinning = false;
+
+  function drawWheel(rot) {
+    var W = canvas.width, C = W / 2, R = C - 8, N = SEGMENTS.length, seg = (Math.PI * 2) / N;
+    ctx.clearRect(0, 0, W, W);
+    for (var i = 0; i < N; i++) {
+      var s = SEGMENTS[i];
+      var a0 = rot + i * seg, a1 = a0 + seg;
+      ctx.beginPath();
+      ctx.moveTo(C, C);
+      ctx.arc(C, C, R, a0, a1);
+      ctx.closePath();
+      ctx.fillStyle = s.color;
+      ctx.fill();
+      ctx.lineWidth = 4; ctx.strokeStyle = "#0a0612"; ctx.stroke();
+
+      ctx.save();
+      ctx.translate(C, C);
+      ctx.rotate(a0 + seg / 2);
+      ctx.textAlign = "right";
+      ctx.fillStyle = s.rare ? "#1a0b00" : "#f6f1ff";
+      ctx.font = (s.rare ? "bold 21px" : "bold 27px") + " Inter, sans-serif";
+      ctx.fillText(s.label, R - 26, 9);
+      ctx.restore();
+    }
+    // hub
+    ctx.beginPath(); ctx.arc(C, C, 42, 0, Math.PI * 2);
+    ctx.fillStyle = "#0a0612"; ctx.fill();
+    ctx.lineWidth = 6; ctx.strokeStyle = "#ff7a18"; ctx.stroke();
+  }
+
+  function lastSpinMs() { return Number(safeGet(CONFIG.storageKey) || 0); }
+
+  function updateSpinUI() {
+    var btn = $("spinBtn");
+    var remaining = CONFIG.spinCooldownMs - (Date.now() - lastSpinMs());
+    if (spinning) return;
+    if (remaining > 0) {
+      btn.disabled = true;
+      var h = Math.floor(remaining / 3600000), m = Math.ceil((remaining % 3600000) / 60000);
+      btn.textContent = "Spin used. Next spin in " + h + "h " + m + "m";
+      $("spinMsg").textContent = "Come back tomorrow for another free spin.";
+    } else {
+      btn.disabled = false;
+      btn.textContent = "Spin the wheel";
+      if (!$("spinMsg").textContent || $("spinMsg").textContent.indexOf("Come back") === 0) $("spinMsg").textContent = "";
+    }
+  }
+
+  function pickWinner() {
+    var total = 0, i;
+    for (i = 0; i < SEGMENTS.length; i++) total += SEGMENTS[i].rare ? CONFIG.spinRareWeight : 1;
+    var r = Math.random() * total;
+    for (i = 0; i < SEGMENTS.length; i++) {
+      r -= SEGMENTS[i].rare ? CONFIG.spinRareWeight : 1;
+      if (r < 0) return i;
+    }
+    return 0;
+  }
+
+  $("spinBtn").addEventListener("click", function () {
+    if (spinning) return;
+    if (CONFIG.spinCooldownMs - (Date.now() - lastSpinMs()) > 0) { updateSpinUI(); return; }
+    spinning = true;
+    $("spinBtn").disabled = true;
+    $("spinMsg").textContent = "Spinning...";
+
+    var idx = pickWinner();
+    var seg = (Math.PI * 2) / SEGMENTS.length;
+    // pointer sits at -PI/2 (top). Segment i center = rot + (i+0.5)*seg must land on the pointer.
+    var base = -Math.PI / 2 - (idx + 0.5) * seg;
+    var d = ((base - wheelRot) % (Math.PI * 2) + Math.PI * 4) % (Math.PI * 2);
+    var from = wheelRot, to = wheelRot + 6 * Math.PI * 2 + d, dur = 4200, t0 = null;
+
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      var t = Math.min(1, (ts - t0) / dur);
+      var ease = 1 - Math.pow(1 - t, 4);
+      wheelRot = from + (to - from) * ease;
+      drawWheel(wheelRot);
+      if (t < 1) { requestAnimationFrame(frame); return; }
+      wheelRot = to % (Math.PI * 2);
+      drawWheel(wheelRot);
+      finishSpin(idx);
+    }
+    requestAnimationFrame(frame);
+  });
+
+  function finishSpin(idx) {
+    spinning = false;
+    safeSet(CONFIG.storageKey, String(Date.now()));
+    var prize = SEGMENTS[idx];
+    if (prize.rare) {
+      $("spinMsg").textContent = "RARE WEDGE! You're entered for the $500 Halloween gift card. Check your email.";
+      track("spin_rare_win", { result: result.key });
+    } else {
+      $("spinMsg").textContent = "You won: " + prize.label + "! We'll send details to your email.";
+      track("spin_win", { prize: prize.label });
+    }
+    try { window.__leadSubmit({ event: "spin_win", quiz: CONFIG.quizId, result: result.key, email: $("femail").value.trim(), prize: prize.label, rare: !!prize.rare, ts: new Date().toISOString() }); } catch (e) {}
+    updateSpinUI();
+  }
+
+  /* ================= BOOT ================= */
+  $("startBtn").addEventListener("click", function () {
+    qi = 0; picks = []; result = null;
+    $("bar").style.width = "0%";
+    showScreen("s-quiz");
+    renderQuestion();
+    track("quiz_start");
+  });
+
+  drawWheel(wheelRot);
+  track("page_view", { quiz: CONFIG.quizId });
+})();
+</script>
+</body>
+</html>
